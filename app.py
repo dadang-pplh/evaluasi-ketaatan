@@ -20,7 +20,7 @@ with col_title:
     st.markdown("""
         <div style='text-align: center;'>
             <h1 style='margin-bottom: 0; color: #2c3e50;'>Evaluasi Ketaatan Mandiri</h1>
-            <p style='font-size: 20px; color: #555;'>Dinas Lingkungan Hidup Kabupaten Contoh</p>
+            <p style='font-size: 20px; color: #555;'>Dinas Lingkungan Hidup Kabupaten Sukoharjo</p>
             <hr style='border:1px solid #2c7a7b; width:70%; margin:auto;'>
         </div>
     """, unsafe_allow_html=True)
