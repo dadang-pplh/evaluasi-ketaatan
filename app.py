@@ -4,19 +4,28 @@ from datetime import datetime
 
 st.set_page_config(page_title="Evaluasi Ketaatan Mandiri", page_icon="🧾", layout="centered")
 
+# --- Tema visual ---
 st.markdown("""
 <style>
-    .title {font-size: 38px; font-weight: 700; color: #2c3e50; text-align: center; margin-bottom: -10px;}
-    .subtitle {font-size: 18px; color: #555; text-align: center; margin-bottom: 40px;}
     .footer {text-align:center; color:#888; font-size:13px; margin-top:50px;}
     .stProgress > div > div > div > div {background-color: #2c7a7b;}
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<p class="title">Evaluasi Ketaatan Mandiri</p>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Pelaku Usaha Bidang Lingkungan Hidup</p>', unsafe_allow_html=True)
-st.divider()
+# --- Header dengan logo dan nama dinas ---
+col_logo, col_title = st.columns([1, 4])
+with col_logo:
+    st.image("logo_dlh.png", width=100)
+with col_title:
+    st.markdown("""
+        <div style='text-align: center;'>
+            <h1 style='margin-bottom: 0; color: #2c3e50;'>Evaluasi Ketaatan Mandiri</h1>
+            <p style='font-size: 20px; color: #555;'>Dinas Lingkungan Hidup Kabupaten Contoh</p>
+            <hr style='border:1px solid #2c7a7b; width:70%; margin:auto;'>
+        </div>
+    """, unsafe_allow_html=True)
 
+# --- Identitas Pelaku Usaha ---
 with st.container():
     st.header("📋 Identitas Pelaku Usaha")
     col1, col2 = st.columns(2)
@@ -29,6 +38,7 @@ with st.container():
         st.text_input("Tanggal", tanggal, disabled=True)
 st.divider()
 
+# --- Membaca pertanyaan dari CSV ---
 try:
     df_q = pd.read_csv("pertanyaan.csv", encoding="utf-8", quotechar='"', sep=",", on_bad_lines="skip")
 except FileNotFoundError:
@@ -40,6 +50,7 @@ if not required_cols.issubset(df_q.columns):
     st.error("❌ File CSV harus memiliki kolom: 'Pertanyaan', 'Dasar_Hukum', dan 'Pelanggaran'.")
     st.stop()
 
+# --- Form Pertanyaan ---
 st.header("📘 Daftar Pertanyaan")
 st.write("Pilih **Ya** jika kewajiban sudah dipenuhi, dan **Tidak** jika belum.")
 
@@ -48,6 +59,7 @@ for i, row in df_q.iterrows():
     pertanyaan = row["Pertanyaan"]
     responses[pertanyaan] = st.radio(pertanyaan, ["Ya", "Tidak"], horizontal=True, key=f"q_{i}")
 
+# --- Proses Hasil ---
 if st.button("🔍 Lihat Hasil Evaluasi"):
     total = len(responses)
     score = sum([1 for r in responses.values() if r == "Ya"])
