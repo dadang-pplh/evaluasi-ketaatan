@@ -1,6 +1,5 @@
-Pertanyaan,Dasar_Hukum,Pelanggaran
-"Apakah perusahaan memiliki dokumen UKL-UPL atau Amdal yang masih berlaku?","UU 32/2009 Pasal 36(1)","Perusahaan belum memiliki dokumen UKL-UPL atau Amdal yang masih berlaku."
-"Apakah perusahaan telah memiliki izin pembuangan air limbah (IPLC)?","PP 22/2021 Pasal 214","Perusahaan belum memiliki izin pembuangan air limbah (IPLC)."
-"Apakah perusahaan melakukan pemantauan kualitas air limbah secara berkala dan melaporkannya?","PP 22/2021 Pasal 269","Perusahaan belum melakukan pemantauan kualitas air limbah secara berkala dan pelaporannya."
-"Apakah perusahaan mengelola limbah B3 sesuai ketentuan (penyimpanan, manifest, pihak pengelola berizin)?","PP 22/2021 Pasal 261","Perusahaan belum mengelola limbah B3 sesuai ketentuan (penyimpanan, manifest, atau pihak pengelola berizin)."
-"Apakah perusahaan telah menyampaikan laporan pelaksanaan pengelolaan lingkungan kepada instansi berwenang?","PermenLHK 1/2021 Pasal 72","Perusahaan belum menyampaikan laporan pelaksanaan pengelolaan lingkungan kepada instansi berwenang."
+pertanyaan,pasal,pernyataan_pelanggaran
+Apakah perusahaan memiliki izin lingkungan yang masih berlaku?,Pasal 36 UU No.32 Tahun 2009,Perusahaan belum memiliki izin lingkungan yang masih berlaku.
+Apakah perusahaan melakukan pemantauan kualitas air limbah secara berkala?,Pasal 68 huruf c UU No.32 Tahun 2009,Perusahaan belum melakukan pemantauan kualitas air limbah secara berkala.
+Apakah perusahaan memiliki dokumen UKL-UPL atau Amdal?,Pasal 22 UU No.32 Tahun 2009,Perusahaan belum memiliki dokumen UKL-UPL atau Amdal.
+Apakah limbah B3 disimpan sesuai ketentuan?,Pasal 59 UU No.32 Tahun 2009,Perusahaan belum menyimpan limbah B3 sesuai ketentuan.
