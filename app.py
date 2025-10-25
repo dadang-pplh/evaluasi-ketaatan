@@ -25,7 +25,7 @@ st.write("### 🏢 Identitas Pelaku Usaha")
 nama_usaha = st.text_input("Nama Pelaku Usaha")
 
 st.write("### 📋 Kuesioner Evaluasi Ketaatan")
-data = pd.read_csv("pertanyaan.csv", encoding="utf-8-sig")
+data = pd.read_csv("pertanyaan.csv")
 jawaban = {}
 
 for i, row in data.iterrows():
