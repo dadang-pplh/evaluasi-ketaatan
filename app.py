@@ -9,7 +9,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 
 st.set_page_config(page_title="Evaluasi Ketaatan Mandiri", layout="centered")
 
-# Header dengan logo dan nama dinas
+# Header
 col_logo, col_title = st.columns([1, 4])
 with col_logo:
     st.image("logo_dlh.png", width=100)
@@ -47,26 +47,32 @@ if st.button("Lihat Hasil Evaluasi"):
         ]
         st.table(pelanggaran[["pernyataan_pelanggaran", "pasal"]])
 
-        # Buat file PDF
+        # Buat PDF dengan text wrapping
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer, pagesize=A4)
         styles = getSampleStyleSheet()
-        story = []
+        style_table = ParagraphStyle(name="Table", fontSize=10, leading=12, alignment=0)
 
+        story = []
         story.append(Image("logo_dlh.png", width=60, height=60))
         story.append(Spacer(1, 12))
         story.append(Paragraph("<b>LAPORAN EVALUASI KETAATAN MANDIRI</b>", styles["Title"]))
         story.append(Paragraph("Dinas Lingkungan Hidup Kabupaten Sukoharjo", styles["Normal"]))
         story.append(Spacer(1, 12))
-
         story.append(Paragraph(f"Nama Pelaku Usaha: <b>{nama_usaha or '-'} </b>", styles["Normal"]))
         story.append(Paragraph(f"Tanggal Evaluasi: {datetime.now().strftime('%d %B %Y')}", styles["Normal"]))
         story.append(Paragraph(f"Hasil Ketaatan: <b>{status}</b>", styles["Normal"]))
         story.append(Paragraph(f"Skor: {skor}%", styles["Normal"]))
         story.append(Spacer(1, 12))
-
         story.append(Paragraph("Kewajiban yang Belum Ditaati:", styles["Heading3"]))
-        table_data = [["Pernyataan Pelanggaran", "Pasal yang Dilanggar"]] + pelanggaran[["pernyataan_pelanggaran", "pasal"]].values.tolist()
+
+        # Tabel dengan Paragraph agar bisa wrap
+        table_data = [["Pernyataan Pelanggaran", "Pasal yang Dilanggar"]]
+        for _, row in pelanggaran.iterrows():
+            pelanggaran_text = Paragraph(row["pernyataan_pelanggaran"], style_table)
+            pasal_text = Paragraph(row["pasal"], style_table)
+            table_data.append([pelanggaran_text, pasal_text])
+
         table = Table(table_data, colWidths=[300, 180])
         table.setStyle(TableStyle([
             ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#2c7a7b")),
