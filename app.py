@@ -21,6 +21,16 @@ with col_title:
         unsafe_allow_html=True
     )
 
+st.subheader("🧾 Identitas Pelaku Usaha")
+
+nama_usaha = st.text_input("Nama Pelaku Usaha / Perusahaan *")
+alamat_usaha = st.text_area("Alamat Usaha *")
+penanggung_jawab = st.text_input("Nama Penanggung Jawab *")
+email = st.text_input("Email (opsional)")
+
+st.markdown("---")
+
+
 st.write("### 🏢 Identitas Pelaku Usaha")
 nama_usaha = st.text_input("Nama Pelaku Usaha")
 
@@ -59,7 +69,10 @@ if st.button("Lihat Hasil Evaluasi"):
         story.append(Paragraph("<b>LAPORAN EVALUASI KETAATAN MANDIRI</b>", styles["Title"]))
         story.append(Paragraph("Dinas Lingkungan Hidup Kabupaten Sukoharjo", styles["Normal"]))
         story.append(Spacer(1, 12))
-        story.append(Paragraph(f"Nama Pelaku Usaha: <b>{nama_usaha or '-'} </b>", styles["Normal"]))
+        story.append(Paragraph(f"<b>Nama Usaha:</b> {nama_usaha}", style))
+        story.append(Paragraph(f"<b>Alamat:</b> {alamat_usaha}", style))
+        story.append(Paragraph(f"<b>Penanggung Jawab:</b> {penanggung_jawab}", style))
+        story.append(Spacer(1, 12))
         story.append(Paragraph(f"Tanggal Evaluasi: {datetime.now().strftime('%d %B %Y')}", styles["Normal"]))
         story.append(Paragraph(f"Hasil Ketaatan: <b>{status}</b>", styles["Normal"]))
         story.append(Paragraph(f"Skor: {skor}%", styles["Normal"]))
@@ -94,3 +107,11 @@ if st.button("Lihat Hasil Evaluasi"):
         )
     else:
         st.info("Selamat! Semua kewajiban telah dipenuhi.")
+        
+if st.button("Lihat Hasil Evaluasi"):
+    if not nama_usaha or not alamat_usaha or not penanggung_jawab:
+        st.warning("⚠️ Harap lengkapi semua kolom identitas pelaku usaha sebelum melanjutkan.")
+    else:
+        # tampilkan hasil evaluasi dan tombol unduh PDF
+        tampilkan_hasil(data, nama_usaha, alamat_usaha, penanggung_jawab)
+
